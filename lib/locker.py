@@ -40,11 +40,26 @@ class Locker:
                 self.key, json.dumps(self.json()))
             file.write(encrypted_content)
 
-    def update_entry(self, name, password, category='password'):
+    def add_entry(self, name, password, category='password'):
         if not self.library.get(category):
             self.library[category] = {}
         self.library[category][name] = password
         self.save()
+
+    def get_entry(self, name, category='password'):
+        if not self.library.get(category) or not self.library[category].get(name):
+            return None
+        else:
+            return {"name": name, "password": self.library[category].get(name)}
+
+    def delete_entry(self, name, category='password'):
+        if self.library.get(category) and self.library[category].get(name):
+            self.library[category].pop(name)
+            self.save()
+    def delete_category(self, category):
+        if self.library.get(category):
+            self.library.pop(category)
+            self.save()
 
     def json(self):
         return {
