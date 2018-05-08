@@ -81,6 +81,7 @@ def show_entry(locker):
     else:
         print(f'No entry "{name}" found in category "{category}"')
 
+
 def generate_password():
     password_length = input('Password length [10]: ')
     readable = input('Readable output [Y/n]: ')
@@ -94,6 +95,7 @@ def generate_password():
         readable = False
     password = PasswordGenerator.generate_password(password_length, readable)
     print(password)
+
 
 key = Keygen.get_key()
 if key:

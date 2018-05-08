@@ -1,6 +1,5 @@
 from Crypto.Cipher import AES
 from Crypto import Random
-import hashlib
 
 
 class Cipher:

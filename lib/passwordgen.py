@@ -3,6 +3,7 @@ import string
 import random
 import textwrap
 
+
 class PasswordGenerator:
     def generate_password(password_length=10, readable=True, special_chars='-_!?#$'):
         generated_password = ''

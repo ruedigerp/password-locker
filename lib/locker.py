@@ -56,6 +56,7 @@ class Locker:
         if self.library.get(category) and self.library[category].get(name):
             self.library[category].pop(name)
             self.save()
+
     def delete_category(self, category):
         if self.library.get(category):
             self.library.pop(category)
