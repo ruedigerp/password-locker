@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 from lib.keygen import Keygen
 from lib.locker import Locker
+from lib.passwordgen import PasswordGenerator
 import getpass
 from config import locker_path
 
@@ -8,6 +9,7 @@ from config import locker_path
 def print_help():
     print('''Help
     add - adds (or updates) an entry
+    gen - generate a new password
     list - lists all entries
     categories - lists all entries
     delete - delete an entry
@@ -79,6 +81,19 @@ def show_entry(locker):
     else:
         print(f'No entry "{name}" found in category "{category}"')
 
+def generate_password():
+    password_length = input('Password length [10]: ')
+    readable = input('Readable output [Y/n]: ')
+    if password_length == '':
+        password_length = 10
+    else:
+        password_length = int(password_length)
+    if readable.lower() == 'y' or readable.lower() == '':
+        readable = True
+    else:
+        readable = False
+    password = PasswordGenerator.generate_password(password_length, readable)
+    print(password)
 
 key = Keygen.get_key()
 if key:
@@ -88,20 +103,25 @@ if key:
     locker.info()
 
     while True:
-        cmd = input(f'({name})> ')
-        if cmd.lower() == 'exit':
+        try:
+            cmd = input(f'({name})> ')
+            if cmd.lower() == 'exit':
+                break
+            elif cmd.lower() == 'list':
+                list_entries(locker)
+            elif cmd.lower() == 'categories':
+                list_categories(locker)
+            elif cmd.lower() == 'add':
+                add_entry(locker)
+            elif cmd.lower() == 'show':
+                show_entry(locker)
+            elif cmd.lower() == 'delete':
+                delete_entry(locker)
+            elif cmd.lower() == 'delete-category':
+                delete_category(locker)
+            elif cmd.lower() == 'gen':
+                generate_password()
+            else:
+                print_help()
+        except EOFError:
             break
-        elif cmd.lower() == 'list':
-            list_entries(locker)
-        elif cmd.lower() == 'categories':
-            list_categories(locker)
-        elif cmd.lower() == 'add':
-            add_entry(locker)
-        elif cmd.lower() == 'show':
-            show_entry(locker)
-        elif cmd.lower() == 'delete':
-            delete_entry(locker)
-        elif cmd.lower() == 'delete-category':
-            delete_category(locker)
-        else:
-            print_help()
