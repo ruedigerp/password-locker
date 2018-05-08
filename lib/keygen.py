@@ -3,6 +3,7 @@ from Crypto.Cipher import AES
 from Crypto import Random
 import base64
 import hashlib
+import getpass
 from config import lock_mode, lock_type
 
 
@@ -30,7 +31,7 @@ class Keygen:
             print(f'Your keyfile has been generated in {key_path}\n\n')
 
     def check_key():
-        key_input = input('Please enter your master password: ')
+        key_input = getpass.getpass('Please enter your master password: ')
         key_input_hash = hashlib.sha256(key_input.encode()).digest()
         base64_key = base64.b64encode(key_input_hash).decode()
         if lock_type == 'env':
@@ -60,6 +61,6 @@ class Keygen:
             else:
                 return base64.b64decode(key)
         else:
-            phrase = input(
+            phrase = getpass.getpass(
                 'No password file found, please provide a new password: ')
             Keygen.generate_key(phrase)

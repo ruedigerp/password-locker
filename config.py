@@ -24,4 +24,4 @@ lock_type = 'env'
 ##    The ~ or $HOME variable gets expanded so you can refer to your home  ##
 ##    directory                                                            ##
 #############################################################################
-locker_path = '~/projects/password-locker/.locker.lsf'
+locker_path = '~/password-locker/'

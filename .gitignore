@@ -4,3 +4,4 @@ venv/
 virtualenv/
 *.lsf
 .czrc
+*.pyc
