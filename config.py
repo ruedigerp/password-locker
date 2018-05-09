@@ -17,7 +17,7 @@ lock_mode = 'quick'
 ##           config after generating your key                             ##
 ##   file  - saves a .locker_key file in your home directory              ##
 ############################################################################
-lock_type = 'env'
+lock_type = 'file'
 
 #############################################################################
 ##  locker_path: the to your password-locker                               ##

@@ -15,7 +15,6 @@ class Locker:
             self.library = {}
             self.save()
         else:
-            print(f'Loading locker "{self.file_name}"')
             self.load()
 
     def load(self):
